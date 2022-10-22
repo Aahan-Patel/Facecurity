@@ -12,7 +12,7 @@ template_dir = os.path.abspath('views/templates')
 static_dir = os.path.abspath('views/static')
 app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 boostrap = Bootstrap5()
-# Registering blueprints
+    # Registering blueprints
 app.register_blueprint(info_blueprint, url_prefix="")
 app.register_blueprint(service_blueprint, url_prefix="")
 app.register_blueprint(auth_blueprint, url_prefix="")

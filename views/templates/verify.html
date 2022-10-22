@@ -47,7 +47,7 @@
                  imgBase64: image_data_url
                 },
                success: function(response) {
-                   // .. do something
+                    window.location.href = location.protocol + '//' + location.host + "/dashboard";
                },
                error: function(jqXHR, textStatus, errorMessage) {
                    console.log(errorMessage); // Optional

@@ -55,6 +55,8 @@ def authorize():
                     profile_picture=resp["picture"], block_id=db_code(7))
         db.session.add(user)
         db.session.commit()
+        login_user(user)
+        return redirect(url_for('service.verify'))
     login_user(user)
     return redirect(url_for('service.dashboard'))
 

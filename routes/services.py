@@ -41,12 +41,11 @@ def dashboard():
 @login_required
 def verify():
     if request.method == "POST":
-        print(request.values.get("imgBase64"))
         image_data = re.sub('^data:image/.+;base64,', '', request.values.get("imgBase64"))
         im = Image.open(BytesIO(base64.b64decode(image_data)))
         image_code = db_code(10)
         image_path = r".\\app\\video\\images\\" + current_user.block_id + ".png"
         im.save(image_path)
-        return json.dumps({'result': 'success'}), 200, {'ContentType': 'application/json'}
+        return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
     return render_template('verify.html')
 
