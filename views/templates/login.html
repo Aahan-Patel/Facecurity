@@ -1,0 +1,12 @@
+{% extends 'bootstrap/base.html' %}
+{% block content %}
+    <div class="card my-5 mx-auto ml-3 bg-custom px-5 py-5" style="color: white; width: 400px">
+        <h3 style="text-align: center;">Log in</h3>
+        <hr>
+            <small class="my-1" style="text-align: center;">Don't have an account. <a href="/auth/register">Create an Account</a></small>
+            <a class="btn btn-outline-dark my-2 oauth" href="/auth/login/google" role="button" style="text-transform:none; background-color: white; height: 41px; width: 310px" >
+            <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+            Login with Google
+            </a>
+    </div>
+{% endblock %}

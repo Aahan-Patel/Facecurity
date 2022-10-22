@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {{ bootstrap.load_css() }}
+    <style>
+        .container {
+            width: 600px;
+            height: 350px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: inline-flex;
+        }
+    </style>
+</head>
+<body style=" background-color: #181515 !important; align-items: center;">
+        <div class="container row text-center d-flex">
+            <video id="video" width="650" height="300" autoplay></video>
+            <button id="click-photo" class="btn btn-danger my-2" style="width: 527px; margin-left: 13px">Record</button>
+            <canvas id="canvas" width="650" height="300" style="display: none"></canvas>
+        </div>
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+        let camera_button = document.querySelector("#start-camera");
+        let video = document.querySelector("#video");
+        let click_button = document.querySelector("#click-photo");
+        let canvas = document.querySelector("#canvas");
+
+        window.addEventListener('load', async function() {
+            video.srcObject = await navigator.mediaDevices.getUserMedia({video: true, audio: false});
+        });
+
+        click_button.addEventListener('click', function() {
+            console.log("test")
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+            let image_data_url = canvas.toDataURL('image/jpeg');
+
+            $.ajax({
+               url: document.URL,
+               type: "POST",
+               data: {
+                 imgBase64: image_data_url
+                },
+               success: function(response) {
+                   // .. do something
+               },
+               error: function(jqXHR, textStatus, errorMessage) {
+                   console.log(errorMessage); // Optional
+               }
+            });
+
+            // data url of the image
+        });
+        </script>
+        {{ bootstrap.load_js() }}
+</body>
+</html>
