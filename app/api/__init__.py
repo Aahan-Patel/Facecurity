@@ -31,10 +31,5 @@ def login():
             print({"registered": True, "email": current_user.email, "block_id": current_user.block_id, "blocked_urls": blocked_urls})
             return {"registered": True, "email": current_user.email, "block_id": current_user.block_id, "blocked_urls": blocked_urls}
         else:
-            url = 'https://127.0.0.1:5000/login'
-            signed_url = ska.sign_url(
-                auth_user='user',
-                secret_key=SECRET_KEY,
-                url=url
-            )
-            return {"registered": False, "signed_url": signed_url}
+            url = 'https://127.0.0.1:5000/api/login'
+            return {"registered": False, "url": url}
