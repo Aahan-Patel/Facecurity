@@ -1,0 +1,29 @@
+{
+    "manifest_version":3,
+    "name":"Facecurity",
+    "version":"0.0.1",
+    "permissions":[
+       "storage",
+       "tabs",
+       "activeTab",
+       "<all_urls>",
+       "http://127.0.0.1:5000/",
+       "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    ],
+    "background":{
+       "service_worker":"background.js"
+    },
+    "action":{
+       "default_popup": "popup.html"
+    },
+    "content_scripts":[
+       {
+          "matches":[
+             "<all_urls>"
+          ],
+          "js":[
+             "Content.js"
+          ]
+       }
+    ]
+ }
