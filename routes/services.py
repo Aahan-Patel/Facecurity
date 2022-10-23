@@ -19,8 +19,8 @@ import base64
 import re
 import cv2
 import numpy as np
-import time
 import face_recognition
+import time
 from os.path import exists
 
 service_blueprint = Blueprint('service', __name__, template_folder='templates')
@@ -65,10 +65,10 @@ def verify():
     return render_template('verify.html')
 
 
-
 @service_blueprint.route('/cam/confirm/<string:block_id>', methods=["POST", "GET"])
 @login_required
 def confirm(block_id):
+    
     if not exists(f"app/video/images/{current_user.block_id}.png"):
         return redirect(url_for("service.verify"))
     if request.method == "POST":
