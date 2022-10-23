@@ -1,5 +1,6 @@
 let btn = document.createElement("button");
 btn.innerHTML = "Secure Tab";
+btn.style.width = "113px"
 btn.addEventListener("click", function() {
     
     chrome.tabs.query(
@@ -19,9 +20,17 @@ btn.addEventListener("click", function() {
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         chrome.storage.sync.get("blocked_urls",function(result){
-                            var dict = result.blocked_urls.push(tab)
-                            console.log(dict)
-                            chrome.storage.sync.set(dict)
+                            var dict = result.blocked_urls
+                            dict.push(tab)
+                            console.log("Dict: " + dict.length)
+                            chrome.storage.sync.set({"blocked_urls": dict})
+                            chrome.storage.sync.get("blocked_urls",function(result){
+                                console.log("Blocked: " + result.blocked_urls.length)
+                            })
+                            let confirmed = document.createElement("p");
+                            confirmed.innerHTML = "This website has been added to your blocked list. It will take 1-2 minutes before the website is blocked. "
+                            btn.replaceWith(confirmed);
+
                         })
                     }
                 }
@@ -38,15 +47,12 @@ chrome.storage.sync.get("block_id",function(result){
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 var response_json = JSON.parse(xhr.responseText);
-                console.log(response_json)
                 if (response_json["registered"] == false) {
                     var url = response_json["url"]
                     chrome.tabs.create({ url: url });
 
                 } else {
-                    console.log(response_json["blocked_urls"])
                     var dict = {"email": response_json["email"], "block_id": response_json["block_id"], "blocked_urls": response_json["blocked_urls"]}
-                    console.log(dict)
                     chrome.storage.sync.set(dict)
                     document.body.appendChild(btn);
                 }
