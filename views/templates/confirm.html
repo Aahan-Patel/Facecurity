@@ -16,7 +16,7 @@
         }
     </style>
 </head>
-<body style=" background-color: #181515 !important; align-items: center;">
+<body id = "body_thing" style=" background-color: #181515 !important; align-items: center;">
         <div class="container row text-center d-flex">
             <video id="video" width="650" height="300" autoplay></video>
             <button id="click-photo" class="btn btn-danger my-2" style="width: 527px; margin-left: 13px">Record</button>
@@ -36,7 +36,6 @@
         });
 
         click_button.addEventListener('click', function() {
-            console.log("test")
             canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
             let image_data_url = canvas.toDataURL('image/jpeg');
 
@@ -47,7 +46,8 @@
                  imgBase64: image_data_url
                 },
                success: function(response) {
-                    window.location.href = location.protocol + '//' + location.host + "/dashboard";
+
+                 window.location.replace({{urlt|tojson}})
                },
             });
 

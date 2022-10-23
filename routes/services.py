@@ -69,7 +69,7 @@ def verify():
 @service_blueprint.route('/cam/confirm/<string:block_id>', methods=["POST", "GET"])
 @login_required
 def confirm(block_id):
-    if not exists(f"app/video/images/{current_user.block_id}.jpg"):
+    if not exists(f"app/video/images/{current_user.block_id}.png"):
         return redirect(url_for("service.verify"))
     if request.method == "POST":
         image_data = re.sub('^data:image/.+;base64,', '', request.values.get("imgBase64"))
@@ -77,7 +77,7 @@ def confirm(block_id):
         image_code = db_code(10)
         im.save("app/video/images/test.png")
 
-        init_img = face_recognition.load_image_file(f"app/video/images/{current_user.block_id}.jpg")
+        init_img = face_recognition.load_image_file(f"app/video/images/{current_user.block_id}.png")
         first_face = face_recognition.face_encodings(init_img)[0]
         print("first", first_face)
 
@@ -99,5 +99,12 @@ def confirm(block_id):
             print('hi')
             location = face_locations
             top, right, bottom, left = location[0] * 4, location[1] * 4, location[2] * 4, location[3] * 4
-            return redirect(url_for("service.dashboard"))
-    return render_template('confirm.html')
+            index = request.args.get("index")
+            url_list = db.session.query(Block).filter(Block.block_id==current_user.block_id).all()
+            urls = []
+            for i in url_list:
+                urls.append(i.url)
+            url = urls[int(index)] + "?redirectid=1"
+            print("redirect url", url)
+            return render_template("confirm.html", urlt = url)
+    return render_template('confirm.html', urlt="")

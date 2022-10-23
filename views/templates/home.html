@@ -18,19 +18,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js%22%3E"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-  <script>
-    var i = 0;
-    var txt = 'Eliminating confusion, providing opportunity, and rewarding students, all at once!'; /* The text */
-    var speed = 50;
-    function typeWriter() {
-    if (i < txt.length) {
-      document.getElementById("caption_below").innerHTML += txt.charAt(i);
-      i++;
-      window.setTimeout(typeWriter, speed);
-   }
-  }
-  
-  window.onload = typeWriter;
-  
-  </script>
 {% endblock %}
