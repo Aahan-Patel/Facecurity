@@ -10,7 +10,7 @@ const signInWithPopup = () => {
 var blockedLinks = []; 
 chrome.storage.sync.get("blocked_urls",function(result){
     blockedLinks = result.blocked_urls
-    console.log(blockedLinks)
+    console.log("Background: " + blockedLinks.length)
 })
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) { // listener for tab opens
     if (changeInfo.status == 'loading') { // when the page is loading (you can do info.status === 'complete' but you will see the page for a second or two)
@@ -22,7 +22,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) { // listene
                 }, function (tab) {
                     chrome.storage.sync.get("block_id",function(result){
                         chrome.tabs.update(tab.id, {
-                            url: 'http://127.0.0.1:5000//cam/confirm/' + result.block_id
+                            url: 'http://127.0.0.1:5000/cam/confirm/' + result.block_id
                         });
                     });
             });
