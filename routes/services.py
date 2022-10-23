@@ -16,7 +16,6 @@ from PIL import Image
 from io import BytesIO
 import base64
 import re
-import face_recognition
 import cv2
 import numpy as np
 import time
@@ -58,6 +57,7 @@ def verify():
     return render_template('verify.html')
 
 
+'''
 @service_blueprint.route('/cam/confirm/<string:block_id>', methods=["POST", "GET"])
 @login_required
 def confirm(block_id):
@@ -89,3 +89,4 @@ def confirm(block_id):
             top, right, bottom, left = location[0] * 4, location[1] * 4, location[2] * 4, location[3] * 4
             return redirect(url_for("service.dashboard"))
     return render_template('confirm.html')
+'''
