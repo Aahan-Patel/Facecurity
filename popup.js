@@ -35,8 +35,9 @@ chrome.storage.sync.get("block_id",function(result){
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 var response_json = JSON.parse(xhr.responseText);
                 if (response_json["registered"] == false) {
-                    var url = response_json["signed_url"]
+                    var url = response_json["url"]
                     chrome.tabs.create({ url: url });
+
                 } else {
                     var dict = {"email": response_json["email"], "block_id": response_json["block_id"], "blocked_urls": response_json["blocked_urls"]}
                     console.log(dict)
