@@ -21,7 +21,7 @@ app.register_blueprint(api_blueprint, url_prefix="")
 
 
 with app.app_context():
-    app.config['SECRET_KEY'] = "ADSJ234234AJIHJ"
+    app.config['SECRET_KEY'] = "ADSJ234234AJIHJ" #arbitrary key needed in order for application to function, not sensitive data
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
